@@ -35,17 +35,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .antMatcher("/**")
-                .authorizeRequests()
-                .antMatchers("/oauth/authorize**", "/login**", "/error**")
-                .permitAll()
-                .and()
-                .authorizeRequests()
+        http.authorizeRequests()
+                .antMatchers("/user/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().permitAll();
+                .csrf().disable();
 
-       // http://localhost:8090/oauth/authorize?client_id=web&response_type=code
+    // http://localhost:8090/oauth/authorize?client_id=web&response_type=code
     }
 }
