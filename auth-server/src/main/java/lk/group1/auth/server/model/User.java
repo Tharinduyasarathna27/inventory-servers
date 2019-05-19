@@ -21,7 +21,7 @@ public class User  {
     }
 
     @Id
-    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Integer id;
 
     @Column(name = "username")
