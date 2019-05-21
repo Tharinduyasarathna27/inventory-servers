@@ -33,7 +33,7 @@ public class User  {
     @Size(min = 6, max = 64)
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email",unique=true)
     @Email(message = "Please enter valid email address")
     private String email;
 

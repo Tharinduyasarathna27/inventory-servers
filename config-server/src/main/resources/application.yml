@@ -6,8 +6,16 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/kasunguruge/spring-cloud-config-store
+          uri: https://github.com/Tharinduyasarathna27/spring-cloud-config-store
           search-paths:
-           - '*service'
+            - '*service'
+          ignoreLocalSshSettings: true
+          hostKey: someHostKey
+          hostKeyAlgorithm: ssh-rsa
+          privateKey:  -----BEGIN RSA PRIVATE KEY-----
+                      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCmNc3jqKI+j3x2bmIfOyQo8Bs3IsJA52/Ve7Z6uCqgejlgOHcjZW45r7/Sm8vRkyy3tUdFO/Yvo0quiXhJrLuIVdNURKwtJreIu9bk8mALU0UPXCJWtKbssmgULVkH+U0KJor2hxvd/Vd/0wNnjUf0ixUJDc8+0f9yYD7/n2tCRQL69eomDt+sKlfV3/PltlGwZT2ijJwfIpd5R7sgMC6A7bmJ9Z+ZgOd3r6y7kfrnJYkXcPwRAk4xKliekhsvbXxCD6wVxdRWMRCJLlVEcUUMXrkBhIMwfAbHmu1J2bvZlf7L1m3QMdJdSk0FZo5aw7RQJhzU2KgM5GaB6GRlx/eCejABD3PH4YNAUMKFRfSIdShrZ8+C4UqN8iljuNN8ViRPU1TW2zuZ9kZCJrzQhlAhTsukoZulsrq/fVAuPPc1K9JzShSbFXhbvEXgHKxYey/OfWHjSECkcqta4lEW2yc0F5TQHCH8hfgDz2U8g11GE9W2d7/k79/7PDRbjSa+WteGrwexXJsTeax8glIbiRUNeXMCrB2mVvjbWAYr+bY3oMQOq6ctqLvegcWJIomskh4ticucdvWAn4Vf1G2WbeXeU3OEem+WB9hM06yO2/FmF+dDcmXd6ehQEdrCstnCuz7sSe2jOeI3qGsCeJJkaz2ieqCCIPlXKrQyWAhn4Vlujw== tharinduyasarathna@gmail.com
+                       -----END RSA PRIVATE KEY-----
+
+
 
    
