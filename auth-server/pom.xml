@@ -8,11 +8,11 @@
 		<version>2.1.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>lk.group1</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>lk.group1.inventory</groupId>
+	<artifactId>oauth-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Oauth</name>
-	<description>Demo project for Spring Boot</description>
+	<name>oauth-server</name>
+	<description>Oauth Server for Inventory System</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -35,10 +35,6 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>

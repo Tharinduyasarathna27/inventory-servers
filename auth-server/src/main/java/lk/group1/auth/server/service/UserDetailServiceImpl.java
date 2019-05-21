@@ -1,5 +1,7 @@
 package lk.group1.auth.server.service;
 
+import lk.group1.auth.server.exception.CustomizedExceptionHandler;
+import lk.group1.auth.server.exception.DataNotFound;
 import lk.group1.auth.server.model.AuthUserDetails;
 import lk.group1.auth.server.model.User;
 import lk.group1.auth.server.repository.UserDetailsRepository;
@@ -8,6 +10,7 @@ import org.springframework.security.authentication.AccountStatusUserDetailsCheck
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,6 +19,9 @@ import java.util.Optional;
 public class UserDetailServiceImpl implements UserDetailsService {
     @Autowired
     private UserDetailsRepository userDetailsRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
 
@@ -32,8 +38,12 @@ public class UserDetailServiceImpl implements UserDetailsService {
         return userDetails;
     }
 
+
+
     public User save(User user){
-        return userDetailsRepository.save(user);
+
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        return  userDetailsRepository.save(user);
     }
 
 
@@ -43,7 +53,14 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
 
     public Optional<User> findById(Integer id){
+
         return userDetailsRepository.findById(id);
+
+    }
+
+
+    public Optional<User> findByUsername(String username) {
+        return userDetailsRepository.findByUsername(username);
     }
 
 

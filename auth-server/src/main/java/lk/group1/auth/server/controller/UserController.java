@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping(value = "/oauth")
 public class UserController {
     @Autowired
     private UserDetailServiceImpl userDetailServiceimpl;
+
 
     public UserController(UserDetailServiceImpl userDetailServiceimpl) {
          this.userDetailServiceimpl=userDetailServiceimpl;
@@ -21,15 +22,15 @@ public class UserController {
 
 
     //create new user
-    @RequestMapping(value="/create",method= RequestMethod.POST)
+    @RequestMapping(value="/user",method= RequestMethod.POST)
     public User saveUser(@RequestBody User user){
 
-       return userDetailServiceimpl.save(user);
 
-    }
+         return userDetailServiceimpl.save(user);
+      }
 
     //update existing user ( only user name )
-    @RequestMapping(value="/update/{id}",method = RequestMethod.PUT)
+    @RequestMapping(value="/updateUser/{id}",method = RequestMethod.PUT)
     public ResponseEntity<User> updateUser(@PathVariable Integer id, @Valid @RequestBody User user){
 
         User tempUser = new User();
@@ -48,7 +49,7 @@ public class UserController {
     }
 
     //delete existing user
-    @RequestMapping(value = "/delete/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/deleteUser/{id}",method = RequestMethod.DELETE)
     public ResponseEntity<User> deleteUsers(@PathVariable Integer id){
 
         if (!userDetailServiceimpl.findById(id).isPresent()){

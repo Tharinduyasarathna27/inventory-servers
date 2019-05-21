@@ -1,6 +1,7 @@
 package lk.group1.auth.server.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.List;
 
 @Entity
@@ -24,12 +25,18 @@ public class User  {
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Integer id;
 
-    @Column(name = "username")
+    @Column(name = "username" )
+    @Size(min = 3, max = 14 ,message = "Username must between  3 and 14 characters")
     private String username;
+
     @Column(name = "password")
+    @Size(min = 6, max = 64)
     private String password;
+
     @Column(name = "email")
+    @Email(message = "Please enter valid email address")
     private String email;
+
     @Column(name = "enabled")
     private boolean enabled;
     @Column(name = "accountNonExpired")
