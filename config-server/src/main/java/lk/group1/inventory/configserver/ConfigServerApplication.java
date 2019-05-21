@@ -1,4 +1,4 @@
-package lk.group1.config.server;
+package lk.group1.inventory.configserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
