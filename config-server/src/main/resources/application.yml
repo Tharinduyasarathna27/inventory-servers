@@ -1,3 +1,4 @@
+
 server:
   port: 8191
 spring:
@@ -5,6 +6,9 @@ spring:
     config:
       server:
         git:
+
           uri: https://github.com/kasunguruge/spring-cloud-config-store-gpg
           search-paths:
            - '*service'
+
+   
