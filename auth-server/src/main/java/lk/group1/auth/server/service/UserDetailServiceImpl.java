@@ -17,6 +17,8 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Autowired
     private UserDetailsRepository userDetailsRepository;
 
+
+
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         Optional<User> optionalUser=userDetailsRepository.findByUsername(name);
@@ -28,5 +30,29 @@ public class UserDetailServiceImpl implements UserDetailsService {
         new AccountStatusUserDetailsChecker().check(userDetails);
 
         return userDetails;
+    }
+
+    public User save(User user){
+        return userDetailsRepository.save(user);
+    }
+
+
+    public  void deteteById(Integer id){
+        userDetailsRepository.deleteById(id);
+    }
+
+
+    public Optional<User> findById(Integer id){
+        return userDetailsRepository.findById(id);
+    }
+
+
+    public User fetchUsers(User user) {
+        Optional<User> optional= userDetailsRepository.findById(user.getId());
+        if(optional.isPresent()){
+            return optional.get();
+        }else{
+            return null;
+        }
     }
 }
