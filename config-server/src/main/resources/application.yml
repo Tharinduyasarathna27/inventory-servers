@@ -6,7 +6,13 @@ spring:
     config:
       server:
         git:
+
+
+         
+
           uri: https://github.com/kasunguruge/spring-cloud-config-store
+
           search-paths:
            - '*service'
-        
+
+   
