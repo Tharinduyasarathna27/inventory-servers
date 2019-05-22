@@ -59,12 +59,13 @@ public class UserDetailServiceImpl implements UserDetailsService {
        }
     }
 
-
+    // delete user by id
     public  void deteteById(Integer id){
         userDetailsRepository.deleteById(id);
     }
 
 
+    // find user by id
     public Optional<User> findById(Integer id){
 
         Optional<User> optionalUser = userDetailsRepository.findById(id);
@@ -76,34 +77,36 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     }
 
-
-    public Optional<User> findByUsername(String username) {
-        return userDetailsRepository.findByUsername(username);
+    public User fetchUsers(User user) {
+        Optional<User> optional= userDetailsRepository.findById(user.getId());
+        if(optional.isPresent()){
+            return optional.get();
+        }else{
+            throw new DataNotFound("User does not exist");
+        }
     }
+
+
+//    public Optional<User> findByUsername(String username) {
+//        return userDetailsRepository.findByUsername(username);
+//    }
 
 
 //    // fetch for testing
 //    public List<User> fetchAllUsers(){
 //        return userDetailsRepository.findAll();
 //    }
+//
+//    public Optional<User> findByUserEmail(String email) {
+//
+//        Optional<User> optional= userDetailsRepository.findByEmail(email);
+//        if(optional.isPresent()){
+//            throw new CustomDataIntergrityVoilationException("already");
+//        }else{
+//            return null;
+//        }
+//
+//    }
 
-    public Optional<User> findByUserEmail(String email) {
 
-        Optional<User> optional= userDetailsRepository.findByEmail(email);
-        if(optional.isPresent()){
-            throw new CustomDataIntergrityVoilationException("already");
-        }else{
-            return null;
-        }
-
-    }
-
-    public User fetchUsers(User user) {
-        Optional<User> optional= userDetailsRepository.findById(user.getId());
-        if(optional.isPresent()){
-            return optional.get();
-        }else{
-            return null;
-        }
-    }
 }

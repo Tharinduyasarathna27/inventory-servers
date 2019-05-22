@@ -1,15 +1,11 @@
 package lk.group1.auth.server.controller;
 
 
-import lk.group1.auth.server.exception.CustomDataIntergrityVoilationException;
 import lk.group1.auth.server.model.User;
 import lk.group1.auth.server.service.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/oauth")
@@ -35,9 +31,10 @@ public class UserController {
 //          return userDetailServiceimpl.fetchAllUsers();
 //      }
 
+
     //update existing user ( only user name )
     @RequestMapping(value="/updateUser/{id}",method = RequestMethod.PUT)
-    public ResponseEntity<User> updateUser(@PathVariable Integer id, @Valid @RequestBody User user){
+    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user){
         User tempUser = new User();
         tempUser.setId(id);
         User updatedUser = userDetailServiceimpl.fetchUsers(tempUser);
