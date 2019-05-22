@@ -1,5 +1,6 @@
 package lk.group1.auth.server.service;
 
+import lk.group1.auth.server.exception.BodyContentNotValidException;
 import lk.group1.auth.server.exception.CustomDataIntergrityVoilationException;
 import lk.group1.auth.server.exception.DataNotFound;
 import lk.group1.auth.server.model.AuthUserDetails;
@@ -39,6 +40,13 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
 
     public User save(User user){
+
+        if (user.getPassword().trim().isEmpty()){
+            throw new BodyContentNotValidException("Can't enter empty password");
+        }
+
+
+
         //encrypt password and save it in db
         user.setPassword("{bcrypt}"+bCryptPasswordEncoder.encode(user.getPassword()));
 
