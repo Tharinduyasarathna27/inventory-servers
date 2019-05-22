@@ -1,6 +1,7 @@
 package lk.group1.auth.server.controller;
 
 
+import lk.group1.auth.server.exception.DataNotFound;
 import lk.group1.auth.server.model.User;
 import lk.group1.auth.server.service.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,8 @@ public class UserController {
         User updatedUser = userDetailServiceimpl.fetchUsers(tempUser);
 
         if (!userDetailServiceimpl.findById(id).isPresent()){
-            ResponseEntity.badRequest().build();
+//            ResponseEntity.badRequest().build();
+            throw new DataNotFound("Cannot find User - "+ id);
         }
 
         updatedUser.setUsername(user.getUsername());
@@ -53,7 +55,7 @@ public class UserController {
     public ResponseEntity<User> deleteUsers(@PathVariable Integer id){
 
         if (!userDetailServiceimpl.findById(id).isPresent()){
-            ResponseEntity.badRequest().build();
+            throw new DataNotFound("Cannot find User - "+ id);
         }
 
         userDetailServiceimpl.deteteById(id);
