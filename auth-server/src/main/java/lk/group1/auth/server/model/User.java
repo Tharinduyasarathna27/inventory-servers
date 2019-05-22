@@ -1,7 +1,8 @@
 package lk.group1.auth.server.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -26,14 +27,13 @@ public class User  {
     private Integer id;
 
     @Column(name = "username" )
-    @Size(min = 3, max = 14 ,message = "Username must between  3 and 14 characters")
+    @Size(min=5, max=14, message="Your name should be between 5 - 14 characters.")
     private String username;
 
     @Column(name = "password")
-    @Size(min = 6, max = 64)
     private String password;
 
-    @Column(name = "email",unique=true)
+    @Column(name = "email")
     @Email(message = "Please enter valid email address")
     private String email;
 
@@ -66,21 +66,18 @@ public class User  {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    public void setUsername(String username) {this.username=username;}
+
 
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
-        this.password = password;
-    }
+        this.password=password;
+        }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getEmail() { return email;}
 
     public void setEmail(String email) {
         this.email = email;

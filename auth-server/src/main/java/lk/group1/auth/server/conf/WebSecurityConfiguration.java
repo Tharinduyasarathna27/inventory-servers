@@ -16,8 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsService userDetailsService
-            ;
+    private UserDetailsService userDetailsService;
 
     @Bean
     protected AuthenticationManager getauthenticationManager() throws Exception {
@@ -25,7 +24,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() { return new BCryptPasswordEncoder();}
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+
+
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     PasswordEncoder passwordEncoder(){
@@ -45,6 +48,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable();
 
-    // http://localhost:8090/oauth/authorize?client_id=web&response_type=code
+
     }
 }

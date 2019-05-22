@@ -1,6 +1,6 @@
 package lk.group1.auth.server.service;
 
-import lk.group1.auth.server.exception.CustomizedExceptionHandler;
+import lk.group1.auth.server.exception.CustomDataIntergrityVoilationException;
 import lk.group1.auth.server.exception.DataNotFound;
 import lk.group1.auth.server.model.AuthUserDetails;
 import lk.group1.auth.server.model.User;
@@ -23,8 +23,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
-
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         Optional<User> optionalUser=userDetailsRepository.findByUsername(name);
@@ -41,9 +39,16 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
 
     public User save(User user){
+        //encrypt password and save it in db
+        user.setPassword("{bcrypt}"+bCryptPasswordEncoder.encode(user.getPassword()));
 
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        return  userDetailsRepository.save(user);
+        //check whether email is already exist.
+        Optional<User> optional= userDetailsRepository.findByEmail(user.getEmail());
+       if(optional.isPresent()){
+           throw new CustomDataIntergrityVoilationException("Email Already Exists");
+       }else{
+           return   userDetailsRepository.save(user);
+       }
     }
 
 
@@ -54,7 +59,12 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     public Optional<User> findById(Integer id){
 
-        return userDetailsRepository.findById(id);
+        Optional<User> optionalUser = userDetailsRepository.findById(id);
+        if (optionalUser.isPresent()){
+            return userDetailsRepository.findById(id);
+        }else {
+            throw new DataNotFound("User does not exist");
+        }
 
     }
 
@@ -63,6 +73,22 @@ public class UserDetailServiceImpl implements UserDetailsService {
         return userDetailsRepository.findByUsername(username);
     }
 
+
+//    // fetch for testing
+//    public List<User> fetchAllUsers(){
+//        return userDetailsRepository.findAll();
+//    }
+
+    public Optional<User> findByUserEmail(String email) {
+
+        Optional<User> optional= userDetailsRepository.findByEmail(email);
+        if(optional.isPresent()){
+            throw new CustomDataIntergrityVoilationException("already");
+        }else{
+            return null;
+        }
+
+    }
 
     public User fetchUsers(User user) {
         Optional<User> optional= userDetailsRepository.findById(user.getId());

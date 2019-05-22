@@ -1,6 +1,7 @@
 package lk.group1.auth.server.exception;
 
 
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,15 +18,27 @@ public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(DataNotFound.class)
     public final ResponseEntity<ExceptionHolder> handleUserNotFoundException(DataNotFound ex,
                                                                              WebRequest request) {
-        ExceptionHolder exceptionResponse = new ExceptionHolder(new Date(), ex.getMessage(),
+        ExceptionHolder exceptionHolder = new ExceptionHolder(new Date(), ex.getMessage(),
                 request.getDescription(false));
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(exceptionHolder, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ExceptionHolder> handleAllExceptions(Exception ex, WebRequest request) {
-        ExceptionHolder exceptionResponse = new ExceptionHolder(new Date(), ex.getMessage(),
+        ExceptionHolder exceptionHolder = new ExceptionHolder(new Date(), ex.getMessage(),
                 request.getDescription(false));
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(exceptionHolder, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+
+    @ExceptionHandler(CustomDataIntergrityVoilationException.class)
+    public final ResponseEntity<ExceptionHolder> handleDuplicateEntryException(CustomDataIntergrityVoilationException ex,
+                                                                             WebRequest request) {
+        ExceptionHolder exceptionHolder = new ExceptionHolder(new Date(), ex.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity<>(exceptionHolder, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
+
 }
