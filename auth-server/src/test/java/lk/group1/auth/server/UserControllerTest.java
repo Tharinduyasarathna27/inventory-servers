@@ -31,6 +31,7 @@ public class UserControllerTest {
     @Test
     public void testUrl() throws Exception {
 
+        //test
         User user = new User();
         user.setId(1);
         user.setUsername("Waruna");
