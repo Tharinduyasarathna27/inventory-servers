@@ -45,7 +45,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
             throw new BodyContentNotValidException("Can't enter empty password");
         }
 
-
+        if (user.getEmail().trim().isEmpty()){
+            throw new BodyContentNotValidException("Can't enter empty email");
+        }
 
         //encrypt password and save it in db
         user.setPassword("{bcrypt}"+bCryptPasswordEncoder.encode(user.getPassword()));
