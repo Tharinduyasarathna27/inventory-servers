@@ -1,7 +1,6 @@
 package lk.group1.auth.server.exception;
 
 
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +16,8 @@ import java.util.Date;
 @ControllerAdvice
 @RestController
 public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
-    @ExceptionHandler(DataNotFound.class)
-    public final ResponseEntity<ExceptionHolder> handleUserNotFoundException(DataNotFound ex,
+    @ExceptionHandler(DataNotFoundException.class)
+    public final ResponseEntity<ExceptionHolder> handleUserNotFoundException(DataNotFoundException ex,
                                                                              WebRequest request) {
         ExceptionHolder exceptionHolder = new ExceptionHolder(new Date(), ex.getMessage(),
                 request.getDescription(false));

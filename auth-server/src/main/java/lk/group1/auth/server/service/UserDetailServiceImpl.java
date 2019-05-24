@@ -2,7 +2,7 @@ package lk.group1.auth.server.service;
 
 import lk.group1.auth.server.exception.BodyContentNotValidException;
 import lk.group1.auth.server.exception.CustomDataIntergrityVoilationException;
-import lk.group1.auth.server.exception.DataNotFound;
+import lk.group1.auth.server.exception.DataNotFoundException;
 import lk.group1.auth.server.model.AuthUserDetails;
 import lk.group1.auth.server.model.User;
 import lk.group1.auth.server.repository.UserDetailsRepository;
@@ -74,7 +74,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         if (optionalUser.isPresent()){
             return userDetailsRepository.findById(id);
         }else {
-            throw new DataNotFound("User does not exist");
+            throw new DataNotFoundException("User does not exist");
         }
 
     }
@@ -84,7 +84,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         if(optional.isPresent()){
             return optional.get();
         }else{
-            throw new DataNotFound("User does not exist");
+            throw new DataNotFoundException("User does not exist");
         }
     }
 
