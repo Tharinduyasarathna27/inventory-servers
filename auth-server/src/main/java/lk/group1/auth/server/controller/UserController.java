@@ -23,15 +23,6 @@ public class UserController {
          return  userDetailServiceimpl.save(user);
       }
 
-//      // get user for testing
-//      @RequestMapping(value="/user",method= RequestMethod.GET)
-//      public List<User> getUser(){
-//
-//
-//          return userDetailServiceimpl.fetchAllUsers();
-//      }
-
-
     //update existing user ( only user name )
     @RequestMapping(value="/updateUser/{id}",method = RequestMethod.PUT)
     public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user){
@@ -55,5 +46,15 @@ public class UserController {
         userDetailServiceimpl.deteteById(id);
         return ResponseEntity.ok().build();
     }
+
+    //      // get user for testing
+//      @RequestMapping(value="/user",method= RequestMethod.GET)
+//      public List<User> getUser(){
+//
+//
+//          return userDetailServiceimpl.fetchAllUsers();
+//      }
+
+
 
 }

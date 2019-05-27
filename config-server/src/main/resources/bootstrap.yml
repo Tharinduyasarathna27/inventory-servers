@@ -1,0 +1,3 @@
+encrypt:
+  enabled: false
+  key: web

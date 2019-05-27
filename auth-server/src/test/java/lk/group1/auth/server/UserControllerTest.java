@@ -17,6 +17,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebMvcTest(UserControllerTest.class)
@@ -27,6 +30,9 @@ public class UserControllerTest {
 
     @MockBean
     UserController userController;
+
+    @MockBean
+    UserDetailServiceImpl userDetailService;
 
     @Test
     public void testUrl() throws Exception {
@@ -40,39 +46,22 @@ public class UserControllerTest {
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         user.setRoles(null);
+        user.setEmail("waruna@gmail.com");
+        user.setEnabled(true);
 
         ObjectMapper mapper = new ObjectMapper();
         String str = mapper.writeValueAsString(user);
 
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/oauth/user")
+        mockMvc.perform(MockMvcRequestBuilders.put("/oauth/updateUser/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(str))
-                        .andExpect(MockMvcResultMatchers.status().isOk());
+                        .andExpect(status().isOk());
 
-//        Permission permission = new Permission();
-//        permission.setId(1);
-//        permission.setName("permisson");
-//
-//
-//        Role role = new Role();
-//        role.setId(1);
-//        role.setName("ADMIN");
-////        role.setPermissions();
-//
-////        User user = new User("Gayan", "123qwe", "wgayan@gmail.com", 1,1,1,1,);
-////        this.username = user.getUsername();
-////        this.password = user.getPassword();
-////        this.email = user.getEmail();
-////        this.enabled = user.isEnabled();
-////        this.accountNonExpired = user.isAccountNonExpired();
-////        this.credentialsNonExpired = user.isCredentialsNonExpired();
-////        this.accountNonLocked = user.isAccountNonLocked();
-////        this.roles = user.getRoles();
-////        User savedUser = userDetailServiceimpl.save(user);
-////        assertThat(savedUser.getRegistrationDate()).isNotNull();
 
     }
+
+
 
 
 }
