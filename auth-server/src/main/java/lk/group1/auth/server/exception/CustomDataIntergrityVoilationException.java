@@ -9,7 +9,6 @@ public class CustomDataIntergrityVoilationException extends DataIntegrityViolati
 
 
     public CustomDataIntergrityVoilationException(String msg) {
-
         super(msg);
     }
 }
