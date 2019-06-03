@@ -3,16 +3,17 @@ package lk.group1.auth.server.model;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class User  {
+public class User implements Serializable {
     public User() {
     }
 
     public User(User user) {
-        this.username = user.getUsername();
+        this.userName = user.getUserName();
         this.password = user.getPassword();
         this.email = user.getEmail();
         this.enabled = user.isEnabled();
@@ -26,9 +27,9 @@ public class User  {
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Integer id;
 
-    @Column(name = "username" )
+    @Column(name = "user_name" )
     @Size(min=5, max=14, message="Your name should be between 5 - 14 characters.")
-    private String username;
+    private String userName;
 
     @Column(name = "password")
     private String password;
@@ -62,12 +63,13 @@ public class User  {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {this.username=username;}
-
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String getPassword() {
         return password;

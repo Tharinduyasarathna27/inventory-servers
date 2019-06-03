@@ -39,8 +39,9 @@ public class AuthUserDetails extends User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return super.getUsername();
+        return super.getUserName();
     }
+
 
     @Override
     public boolean isAccountNonExpired() {

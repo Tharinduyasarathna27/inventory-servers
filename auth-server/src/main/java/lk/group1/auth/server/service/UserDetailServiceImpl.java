@@ -20,13 +20,12 @@ import java.util.Optional;
 public class UserDetailServiceImpl implements UserDetailsService {
     @Autowired
     private UserDetailsRepository userDetailsRepository;
-
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        Optional<User> optionalUser=userDetailsRepository.findByUsername(name);
+       Optional<User> optionalUser=userDetailsRepository.findByUserName(name);
 
         optionalUser.orElseThrow(()-> new UsernameNotFoundException("username or password wrong"));
 
@@ -89,8 +88,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
     }
 
 
-//    public Optional<User> findByUsername(String username) {
-//        return userDetailsRepository.findByUsername(username);
+
+//    public Optional<User> findByuser_name(String username) {
+//        return userDetailsRepository.findByuser_name(username);
 //    }
 
 

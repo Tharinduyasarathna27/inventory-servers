@@ -33,7 +33,7 @@ public class UserController {
         if (!userDetailServiceimpl.findById(id).isPresent()){
             ResponseEntity.badRequest().build();
         }
-        updatedUser.setUsername(user.getUsername());
+        updatedUser.setUserName(user.getUserName());
         return ResponseEntity.ok(userDetailServiceimpl.save(updatedUser));
     }
 
